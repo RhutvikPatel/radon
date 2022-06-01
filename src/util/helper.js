@@ -1,9 +1,11 @@
 const printDate = function(){
-    console.log("Today's Date is: 6th June 2022")
+    let currentDate = new Date()
+    console.log("Today's Date is: "+ currentDate)
 }
 
 const printMonth = function(){
-    console.log("This month is June")
+    const currentMonth = new Date().getMonth()+1;//we add 1 to getMonth() because it returns zero-based index(starting with 0)
+    console.log("This month is: "+ currentMonth)
 }
 
 const getBatchInfo = function(){
