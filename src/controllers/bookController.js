@@ -7,6 +7,12 @@ const createBook= async function (req, res) {
     res.send({msg: savedData})
 }
 
+const createAuthor = async function(req, res){
+    let data= req.body
+    let savedData= await AuthorModel.create(data)
+    res.send({msg: savedData})
+}
+
 const getBooksByAuthorCB= async function(req, res){
     let authorData = await AuthorModel.find({author_name:"Chetan Bhagat"}).select("author_id")
     let bookList = await BookModel.find({author_id:authorData[0].author_id})
