@@ -19,4 +19,8 @@ router.get("/authorOfBook",BookController.authorOfBook)
 
 router.get("/booksOfAuthorBetween50_100",BookController.booksOfAuthorBetween50_100)
 
+router.get("/bookByAuthorId/:authorId",BookController.bookByAuthorId)
+
+router.get("/authorOlder50",BookController.authorOlder50)
+
 module.exports = router;

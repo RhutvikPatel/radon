@@ -7,12 +7,6 @@ const createBook= async function (req, res) {
     res.send({msg: savedData})
 }
 
-const createAuthor = async function(req, res){
-    let data= req.body
-    let savedData= await AuthorModel.create(data)
-    res.send({msg: savedData})
-}
-
 const getBooksByAuthorCB= async function(req, res){
     let authorData = await AuthorModel.find({author_name:"Chetan Bhagat"}).select("author_id")
     let bookList = await BookModel.find({author_id:authorData[0].author_id})
@@ -35,4 +29,17 @@ const booksOfAuthorBetween50_100= async function(req, res){
     res.send({bookData,authorData})
 }
 
-module.exports= {createBook, getBooksByAuthorCB, booksOfAuthorBetween50_100, authorOfBook}
+const bookByAuthorId= async function(req, res){
+    authorIdFromFromRequest=req.params.authorId
+    let bookList = await BookModel.find({author_id:authorIdFromFromRequest}).select({name:1, _id:0})
+    if(bookList.length==0) return res.send({msg: "Author Id not found please enter valid Id"})
+    res.send({data: bookList})
+}
+
+const authorOlder50= async function(req, res){
+    let bookList = await BookModel.find({ratings:{$gt:4}}).select({authorId:1, _id:0})
+    let authorList = await AuthorModel.find({$and:[{authorId:bookList.authorId},{age:{$gt:50}}]}).select({author_name:1, age:1, _id:0})
+    res.send({data: authorList})
+}
+
+module.exports= {createBook, getBooksByAuthorCB, booksOfAuthorBetween50_100, authorOfBook, bookByAuthorId, authorOlder50}
