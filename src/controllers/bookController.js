@@ -33,18 +33,17 @@ const updateIsHardCover= async function (req, res) {
 }
 
 const bookPublishedByPenguinAndHarperCollins = async function (req, res) {
-    let publishers = await PublisherModel.find({name:{$in:["Penguin", "HarperCollins"]}})
-    // let books = await BookModel.find().populate('publisher')
-    // let books = await BookModel.find().populate('publisher').find({"publisher.name":{$in:["Penguin", "HarperCollins"]}})
-    let booklist
-    for(let i in publishers){
-        booklist= await BookModel.find({"publisher.name": publishers[i].name})
-    }
-    res.send({data: booklist})
+    let publisherId = await PublisherModel.find({name:{$in:["Penguin", "HarperCollins"]}}).select({_id:1})
+    let updateBook = await BookModel.updateMany({publisher: publisherId},{$set:{isHardCover:true}},{new:true})
+    
+    res.send({data: updateBook})
 }
 
 const booksByAuthorRating = async function(req, res) {
+    let authorDetail= await AuthorModel.find({rating:{$gt:3.5}})
+    let updatePrice = await BookModel.updateMany({author: authorDetail},{$inc: {price:10}},{new:true})
 
+    res.send({data: updatePrice})
 }
 
 module.exports={createBook, getBooksWithAuthorAndPublisherDetails, updateIsHardCover,  booksByAuthorRating, bookPublishedByPenguinAndHarperCollins}
