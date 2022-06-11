@@ -9,7 +9,7 @@
 
 <!-- WHY Middleware -->
 - manages the flow of control
-- code reusability esp for restrivted routes
+- code reusability esp for restricted routes
 
 <!-- WHAT -->
 - sit between your router and your HANDLER

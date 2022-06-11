@@ -9,17 +9,10 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-
-
-
 router.post("/createBook", BookController.createBook  )
-
-
-
 
 // router.post("/createUser", UserController.createUser  )
 // router.get("/getUsersData", UserController.getUsersData)
-
 
 // const mid1= function ( req, res, next) {
 //     console.log("Hi I am a middleware named Mid1")
@@ -44,19 +37,11 @@ router.post("/createBook", BookController.createBook  )
 // router.get('/termsAndConditions',  UserController.termsAndConditions)
 // router.get('/register',  UserController.register)
 
-
-
-
-
-router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
-
-
-
+router.get("/basicRoute",  UserController.basicCode)
+// commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4,
 // router.get("/basicRoute2", commonMW.mid1, UserController.basicCode2)
 // router.get("/basicRoute3", commonMW.mid2, UserController.basicCode3)
 // router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
-
-
 
 
 module.exports = router;
